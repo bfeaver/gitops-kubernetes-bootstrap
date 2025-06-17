@@ -17,7 +17,7 @@ spec:
       - name: controller.kind
         value: daemonset
     repoURL: https://helm.nginx.com/stable
-    targetRevision: 0.14.0
+    targetRevision: 0.18.1
   syncPolicy:
     automated:
       prune: true
