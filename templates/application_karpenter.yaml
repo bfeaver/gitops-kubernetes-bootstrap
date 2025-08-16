@@ -8,7 +8,7 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: cluster-config
+  project: default
   source:
     repoURL: oci://public.ecr.aws/
     path: karepenter/karpenter
