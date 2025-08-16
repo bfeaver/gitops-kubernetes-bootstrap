@@ -11,3 +11,5 @@ spec:
   securityGroupSelectorTerms:
     - tags:
         kubernetes.io/cluster/{{ .Values.clusterName }}: "owned"
+  amiSelectorTerms:
+    - owner: "amazon"
