@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: karpenter
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: cluster-config
+  source:
+    repoURL: oci://public.ecr.aws/
+    path: karepenter/karpenter
+    targetRevision: "1.6.0"
+    helm:
+      skipCrds: true
+      parameters:
+        - name: settings.clusterName
+          value: {{ .Values.clusterName }}
+        - name: controller.resources.requests.cpu
+          value: "1"
+        - name: controller.resources.requests.memory
+          value: "1Gi"
+        - name: controller.resources.limits.cpu
+          value: "1"
+        - name: controller.resources.limits.memory
+          value: "1Gi"
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: karpenter
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
