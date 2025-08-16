@@ -14,7 +14,6 @@ spec:
     repoURL: oci://public.ecr.aws/karpenter/karpenter
     targetRevision: 1.6.0
     helm:
-      skipCrds: true
       parameters:
         - name: settings.clusterName
           value: {{ .Values.clusterName }}
