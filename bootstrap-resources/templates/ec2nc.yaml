@@ -10,6 +10,6 @@ spec:
         kubernetes.io/cluster/yet-another-test-cluster: "shared" # Cheating...
   securityGroupSelectorTerms:
     - tags:
-        kubernetes.io/cluster/{{ .Values.clusterName | quote }}: "owned"
+        kubernetes.io/cluster/{{ .Values.clusterName }}: "owned"
   amiSelectorTerms:
     - id: "ami-0f095d6ce7b478b6d"
