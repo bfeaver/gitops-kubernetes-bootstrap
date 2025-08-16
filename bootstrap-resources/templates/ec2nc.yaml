@@ -4,7 +4,7 @@ metadata:
   name: default
 spec:
   amiFamily: AL2023 # Amazon Linux 2023
-  role: "KarpenterNodeRole-{{ .Values.clusterName }}"
+  role: "{{ .Values.clusterName }}-workers"
   subnetSelectorTerms:
     - tags:
         kubernetes.io/cluster/yet-another-test-cluster: "shared" # Cheating...
