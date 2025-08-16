@@ -7,9 +7,9 @@ spec:
   role: "KarpenterNodeRole-{{ .Values.clusterName }}"
   subnetSelectorTerms:
     - tags:
-        karpenter.sh/discovery: {{ .Values.clusterName | quote }}
+        kubernetes.io/cluster/yet-another-test-cluster: "shared" # Cheating...
   securityGroupSelectorTerms:
     - tags:
-        karpenter.sh/discovery: {{ .Values.clusterName | quote }}
+        kubernetes.io/cluster/{{ .Values.clusterName | quote }}: "owned"
   amiSelectorTerms:
     - id: "ami-0f095d6ce7b478b6d"
