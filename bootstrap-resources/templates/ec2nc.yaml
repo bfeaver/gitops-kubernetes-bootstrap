@@ -12,4 +12,4 @@ spec:
     - tags:
         kubernetes.io/cluster/{{ .Values.clusterName }}: "owned"
   amiSelectorTerms:
-    - owner: "amazon"
+    - alias: al2023
