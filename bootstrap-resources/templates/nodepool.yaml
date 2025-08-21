@@ -1,3 +1,5 @@
+{{- if .Values.defaultNodePool.enabled }}
+---
 apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
@@ -31,3 +33,20 @@ spec:
   disruption:
     consolidationPolicy: WhenEmptyOrUnderutilized
     consolidateAfter: 1m
+---
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: default
+spec:
+  amiFamily: AL2023 # Amazon Linux 2023
+  role: "{{ .Values.clusterName }}-workers"
+  subnetSelectorTerms:
+    - tags:
+        kubernetes.io/cluster/yet-another-test-cluster: "shared" # Cheating...
+  securityGroupSelectorTerms:
+    - tags:
+        kubernetes.io/cluster/{{ .Values.clusterName }}: "owned"
+  amiSelectorTerms:
+    - alias: al2023@latest # don't leave it this way
+{{- end }}
