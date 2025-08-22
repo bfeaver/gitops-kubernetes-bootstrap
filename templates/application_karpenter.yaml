@@ -25,6 +25,12 @@ spec:
           value: "1"
         - name: controller.resources.limits.memory
           value: "1Gi"
+      valuesObject:
+        tolerations:
+          - key: "dedicated"
+            operator: "Equal"
+            value: "karpenterGroup"
+            effect: "NoSchedule"
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: karpenter
