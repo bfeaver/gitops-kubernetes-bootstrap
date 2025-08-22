@@ -30,9 +30,7 @@ spec:
         - name: controller.resources.limits.memory
           value: "1Gi"
         - name: tolerations
-          value:
-            - key: "karpenterGroup"
-              operator: "Exists"
+          value: "key[0].operator=Exists"
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: karpenter
