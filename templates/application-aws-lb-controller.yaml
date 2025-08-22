@@ -12,6 +12,7 @@ spec:
     targetRevision: 1.13.4
     helm:
       valuesObject:
+        clusterName: {{ .Values.clusterName }}
         serviceAccount:
           name: "aws-load-balancer-controller"
   destination:
