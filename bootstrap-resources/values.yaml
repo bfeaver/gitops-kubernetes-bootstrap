@@ -2,4 +2,4 @@
 clusterName:
 
 defaultNodePool:
-  enabled: false
+  enabled: true
