@@ -1,5 +1,4 @@
 {{- if .Values.defaultNodePool.enabled }}
----
 apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
 metadata:
@@ -14,7 +13,7 @@ spec:
     - tags:
         karpenter.sh/discovery/{{ .Values.clusterName }}: "owned"
   amiSelectorTerms:
-    - alias: al2023@latest # don't leave it this way
+    - alias: "al2023@v20250819" # don't leave it this way
 ---
 apiVersion: karpenter.sh/v1
 kind: NodePool
