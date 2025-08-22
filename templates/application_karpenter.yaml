@@ -14,23 +14,27 @@ spec:
     repoURL: oci://public.ecr.aws/karpenter/karpenter
     targetRevision: 1.6.0
     helm:
-      parameters:
-        - name: settings.clusterName
-          value: {{ .Values.clusterName }}
-        - name: controller.resources.requests.cpu
-          value: "1"
-        - name: controller.resources.requests.memory
-          value: "1Gi"
-        - name: controller.resources.limits.cpu
-          value: "1"
-        - name: controller.resources.limits.memory
-          value: "1Gi"
       valuesObject:
+        controller:
+          resources:
+            requests:
+              cpu: "1"
+              memory: "1Gi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+        nodeSelector:
+          karpenter.sh/controller: "true"
+        settings:
+          clusterName: {{ .Values.clusterName }}
         tolerations:
-          - key: "dedicated"
-            operator: "Equal"
-            value: "karpenterGroup"
-            effect: "NoSchedule"
+          - key: CriticalAddonsOnly
+            operator: Exists
+          - key: karpenter.sh/controller
+            operator: Exists
+            effect: NoSchedule
+        webhook:
+          enabled: false
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: karpenter
