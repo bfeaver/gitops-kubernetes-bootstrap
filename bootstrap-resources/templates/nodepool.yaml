@@ -1,20 +1,4 @@
 {{- if .Values.defaultNodePool.enabled }}
-apiVersion: karpenter.k8s.aws/v1
-kind: EC2NodeClass
-metadata:
-  name: default
-spec:
-  amiFamily: AL2023 # Amazon Linux 2023
-  role: "sd-dev-feaver-01"
-  subnetSelectorTerms:
-    - tags:
-        karpenter.sh/discovery/{{ .Values.clusterName }}: "owned"
-  securityGroupSelectorTerms:
-    - tags:
-        karpenter.sh/discovery/{{ .Values.clusterName }}: "owned"
-  amiSelectorTerms:
-    - alias: "al2023@v20250819" # don't leave it this way
----
 apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
@@ -48,4 +32,20 @@ spec:
   disruption:
     consolidationPolicy: WhenEmptyOrUnderutilized
     consolidateAfter: 1m
+---
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: default
+spec:
+  amiFamily: AL2023 # Amazon Linux 2023
+  role: "sd-dev-feaver-01-20250822041008525800000001"
+  subnetSelectorTerms:
+    - tags:
+        karpenter.sh/discovery/{{ .Values.clusterName }}: "owned"
+  securityGroupSelectorTerms:
+    - tags:
+        karpenter.sh/discovery/{{ .Values.clusterName }}: "owned"
+  amiSelectorTerms:
+    - alias: "al2023@v20250819" # don't leave it this way
 {{- end }}
