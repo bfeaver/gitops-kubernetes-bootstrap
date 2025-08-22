@@ -19,8 +19,8 @@ spec:
           value: Default
         - name: settings.clusterName
           value: {{ .Values.clusterName }}
-        - name: serviceAccount.annotations.eks\.amazonaws\.com/role-arn
-          value: "arn:aws:iam::485928541354:role/sd-dev-feaver-01-20250822004707010200000001"
+{{/*        - name: serviceAccount.annotations.eks\.amazonaws\.com/role-arn*/}}
+{{/*          value: "arn:aws:iam::485928541354:role/sd-dev-feaver-01-20250822004707010200000001"*/}}
         - name: controller.resources.requests.cpu
           value: "1"
         - name: controller.resources.requests.memory
