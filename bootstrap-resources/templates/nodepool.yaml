@@ -39,7 +39,7 @@ metadata:
   name: default
 spec:
   amiFamily: AL2023 # Amazon Linux 2023
-  role: "{{ .Values.clusterName }}-workers"
+  role: "sd-dev-feaver-01"
   subnetSelectorTerms:
     - tags:
         karpenter.sh/discovery/{{ .Values.clusterName }}: "owned"
